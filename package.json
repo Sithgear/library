@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Sithgear/library#readme",
   "dependencies": {
+    "chalk": "^2.4.2",
     "express": "^4.16.4"
   }
 }
