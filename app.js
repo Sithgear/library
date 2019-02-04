@@ -1,12 +1,23 @@
 var express = require('express');
-
-var app = express();
+var chalk = require('chalk');
+var debug = require('debug')('app');
+var morgan = require('morgan');
+var path = require('path');
 var port = process.env.PORT || 8080;
 
+var app = express();
+
+
+app.use(morgan('tiny'));
+app.use(express.static(path.join(__dirname, '/public')));
+app.use('/css', express.static(path.join(__dirname,'/node_modules/bootstrap/dist/css')));
+app.use('/js', express.static(path.join(__dirname,'/node_modules/bootstrap/dist/js')));
+app.use('/js', express.static(path.join(__dirname,'/node_modules/jquery/dist')));
+
 app.get('/', function(request,response){
-  response.send('Hello from my library');
+  response.sendFile(path.join(__dirname,'/views/index.html'));
 });
 
 app.listen(port,function(){
-  console.log('Listening on ' + port);
+  debug('Listening on ' + chalk.green(port));
 });
